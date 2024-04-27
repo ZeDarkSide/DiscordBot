@@ -1,0 +1,42 @@
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\ZeDarkSide Discord Bot.exe.config
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\ZeDarkSide Discord Bot.exe
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\ZeDarkSide Discord Bot.pdb
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\ConcurrentCollections.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.CommandsNext.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.Interactivity.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.SlashCommands.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Extensions.DependencyInjection.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Newtonsoft.Json.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Buffers.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Collections.Immutable.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Memory.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Numerics.Vectors.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Threading.Channels.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Threading.Tasks.Extensions.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\ConcurrentCollections.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.CommandsNext.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.Interactivity.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\DSharpPlus.SlashCommands.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Extensions.DependencyInjection.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\Newtonsoft.Json.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Buffers.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Collections.Immutable.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Memory.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Numerics.Vectors.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Threading.Channels.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\System.Threading.Tasks.Extensions.xml
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\ZeDarkSide Discord Bot.csproj.AssemblyReference.cache
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\ZeDarkSide Discord Bot.csproj.CoreCompileInputs.cache
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\ZeDarkSide Discord Bot.exe
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\ZeDarkSide Discord Bot.pdb
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\ZeDarkSi.28AF0D5A.Up2Date
