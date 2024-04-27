@@ -10,7 +10,6 @@ using DSharpPlus.Entities;
 using DSharpPlus;
 using Newtonsoft.Json;
 using System.IO;
-using System.Runtime.Remoting.Contexts;
 using System.Xml.Linq;
 using ZeDarkSide_Discord_Bot.config;
 
@@ -322,7 +321,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
             embedBuilder.AddField("ErrorCode", $"!!ErrorCode [Error number] displays info about a error you get", inline: false);
            // embedBuilder.AddField("Addpoints", $"**This is an owner-only command!**", inline: false);
            // embedBuilder.AddField("PauseBot", $"**This is an Owner-only command!**", inline: false);
-            embedBuilder.AddField("Raid", $"!!raid [name] [start time] [raid id] use a name from this list [lw,kf,vog,vow,dsc,gos,ron] and start time user [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
+            embedBuilder.AddField("Raid", $"!!raid [name] [start time] use a name from this list [lw,kf,vog,vow,dsc,gos,ron] and start time [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
 
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
         }

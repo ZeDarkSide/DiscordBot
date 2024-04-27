@@ -94,7 +94,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 Color = DiscordColor.Red,
                 // Fields = ("Money",$"{userPoints}",true)
             };
-            embedBuilder.AddField("Bank", $"The Bank command shows your stats(money,roles)", inline: false);          
+            embedBuilder.AddField("Bank", $"!!bank The Bank command shows your stats(money,roles)", inline: false);          
             embedBuilder.AddField("Gamble", $"!!gamble [bet] gamble a set amount of money", inline: false);
             embedBuilder.AddField("Rob", $"!!rob [@someone] you can try to rob someone or they rob you 0-0", inline: false);
             embedBuilder.AddField("Slots", $"!!slots [bet] you play slots with your set bet", inline: false);
@@ -102,7 +102,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
             embedBuilder.AddField("ErrorCode", $"!!ErrorCode [Error number] displays info about a error you get", inline: false);
           //  embedBuilder.AddField("Addpoints", $"**This is a owner only command!**", inline: false);
           //  embedBuilder.AddField("PauseBot", $"**This is a Owner only command!**", inline: false);
-            embedBuilder.AddField("Raid", $"!!raid [name] [start time] [raid id] use a name from this list [lw,kf,vog,vow,dsc,gos,ron] and start time user [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
+            embedBuilder.AddField("Raid", $"!!raid [name] [start time] use a name from this list [lw,kf,vog,vow,dsc,gos,ron] and start time [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
             await ctx.Channel.SendMessageAsync(embed: embedBuilder);
         }
 

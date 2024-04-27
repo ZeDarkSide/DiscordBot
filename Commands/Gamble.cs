@@ -671,11 +671,11 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
         
-        [Command("addpoints")]//fix this later 
+        [Command("addpoints")]
         public async Task Addpoints(CommandContext ctx , int PointAmount, DiscordMember user )
         {
 
-            if (ctx.User.Id == 1114778208903122964)
+            if (ctx.User.Id == 1114778208903122964 || ctx.User.Id == 653805970610192394)
             {
                 if (user.Id == null || user.Id == 0)
                 {
@@ -843,11 +843,13 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
 
+        
+
 
         [Command("raid")]
         [RequirePermissions(Permissions.ManageMessages)]
         [RequireBotPermissions(Permissions.ManageMessages)]
-        public async Task Raid(CommandContext ctx, string raidAlias, string startTime = "undefined")
+        public async Task Raid(CommandContext ctx, DiscordClient Client, string raidAlias, string startTime = "undefined")
         {
 
             if (startTime == null || startTime == "")
@@ -953,6 +955,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 );
 
             var message = await ctx.RespondAsync(messageBuilder);
+
 
             while (true)
             {
@@ -1218,7 +1221,35 @@ namespace ZeDarkSide_Discord_Bot.Commands
             }
         }
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
     public class JSONStructure
     {

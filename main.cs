@@ -6,6 +6,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Extensions;
 using DSharpPlus.SlashCommands;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,10 @@ namespace ZeDarkSide_Discord_Bot
                 AutoReconnect = true,
                 ReconnectIndefinitely = true
             };
-
+            new DiscordConfiguration()
+            {
+                MinimumLogLevel = LogLevel.Debug
+            };
             Client = new DiscordClient(discordConfig);
             
 
