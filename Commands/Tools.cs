@@ -8,112 +8,77 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.ComponentModel.DataAnnotations;
+using System.Net.Mail;
 
 namespace ZeDarkSide_Discord_Bot.Commands
 {
     public class Tools : BaseCommandModule
     {
 
-        [Command("test")]
-        public async Task TestCommands(CommandContext ctx)
+
+        #region Bug testing 
+
+        [Command("bug")]
+        public async Task Bug(CommandContext ctx, params string[] args)
         {
-
-            await ctx.Channel.SendMessageAsync($"this is a bot test {ctx.User.Username}");
-
-        }
-
-
-        [Command("EmbedTest")]
-        [Cooldown(1,5, CooldownBucketType.Global)]
-        public async Task EmbedTestCommands(CommandContext ctx, string name)
-        {
-
-
-            var embedBuilder = new DiscordEmbedBuilder
+            if (args.Length < 4)
             {
-                Title = name,
-                Color = DiscordColor.Red
-            };
-            await ctx.Channel.SendMessageAsync(embed : embedBuilder);
-
-        }
-
-
-
-        [Command("ErrorCode")]
-        [Cooldown(1, 5, CooldownBucketType.Global)]
-        public async Task Error(CommandContext ctx, [RemainingText] string text)
-        {
-            if (text == "789")
-            {
-                var embedBuilder = new DiscordEmbedBuilder
-                {
-                    Title = $"ERROR 789",
-                    Description = $"You will get this error when\nYou tried using or typed a @ in your message. This is not allowed. This can happen when you do something like !!say GET PINGED @User",
-                    Color = DiscordColor.Red,
-                    // Fields = ("Money",$"{userPoints}",true)
-                };
-                
-                await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-            }else if (text == "847")
-            {
-                var embedBuilder = new DiscordEmbedBuilder
-                {
-                    Title = $"ERROR 847",
-                    Description = $"You will get this error when\nYou tried making a/the bot use a bot command. This is not allowed. This can happen when you do something like !!rob @ZeDarkSide",
-                    Color = DiscordColor.Red,
-                    // Fields = ("Money",$"{userPoints}",true)
-                };
-
-                await ctx.Channel.SendMessageAsync(embed: embedBuilder);
+                await ctx.RespondAsync("Please provide all required parameters: bug name, bug details, reproduction steps, and reporter name.\nexample:  !!bug \"bug name\" \"bug details\" \"Reproduction Steps\" \"user sending report\" ");
+                return;
             }
-            else
-            {
-                var embedBuilder = new DiscordEmbedBuilder
-                {
-                    Title = $"ERROR Missing var",
-                    Description = $"You either forgot to put a error code in or that error code does not exist!",
-                    Color = DiscordColor.Red,
-                    // Fields = ("Money",$"{userPoints}",true)
-                };
 
-                await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-            }
+
+            string bugName = args[0];
+            string bugDetails = args[1];
+            string reproductionSteps = args[2];
+            string reporterName = args[3];
+
+
+            var embed = new DiscordEmbedBuilder()
+                .WithTitle(bugName)
+                .WithDescription($"Bug Details:\n {bugDetails}")
+                .AddField("Reproduction Steps", reproductionSteps)
+                .WithFooter($"Reported by {reporterName}")
+                .WithColor(DiscordColor.Red);
+
+
+            var owner = await ctx.Guild.GetMemberAsync(653805970610192394) as DiscordMember;
+            await owner.SendMessageAsync($"Bug Report by {ctx.User.Username}");
+            await owner.SendMessageAsync(embed: embed);
+
+
+            await ctx.Message.DeleteAsync();
+            await ctx.RespondAsync($"Bug report for '{bugName}' has been submitted successfully. Thank you! {ctx.User.Username}");
         }
 
 
 
 
-        [Command("Help")]
-        public async Task help(CommandContext ctx)
+
+        #endregion
+
+        #region Updates
+
+/*        [Command("patch")]
+        public async Task PatchNotes(CommandContext ctx)
         {
-            var embedBuilder = new DiscordEmbedBuilder
+
+            var EmbedMaker = new DiscordEmbedBuilder()
             {
-                Title = $"Help",
-                Description = $"A list of commands you can use!",
-                Color = DiscordColor.Red,
-                // Fields = ("Money",$"{userPoints}",true)
+                Title = $"Patch Notes",
+                ImageUrl = "PatchNotes.png"
             };
-            embedBuilder.AddField("Bank", $"!!bank The Bank command shows your stats(money,roles)", inline: false);          
-            embedBuilder.AddField("Gamble", $"!!gamble [bet] gamble a set amount of money", inline: false);
-            embedBuilder.AddField("Rob", $"!!rob [@someone] you can try to rob someone or they rob you 0-0", inline: false);
-            embedBuilder.AddField("Slots", $"!!slots [bet] you play slots with your set bet", inline: false);
-            embedBuilder.AddField("Leaderboard", $"See the top 10 richest people in the server", inline: false);          
-            embedBuilder.AddField("ErrorCode", $"!!ErrorCode [Error number] displays info about a error you get", inline: false);
-          //  embedBuilder.AddField("Addpoints", $"**This is a owner only command!**", inline: false);
-          //  embedBuilder.AddField("PauseBot", $"**This is a Owner only command!**", inline: false);
-            embedBuilder.AddField("Raid", $"!!raid [name] [start time] use a name from this list [lw,kf,vog,vow,dsc,gos,ron] and start time [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
-            await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-        }
+
+
+        }*/
+
+
+        #endregion
 
 
 
-
-
-
-
-
-        //Test commands and templates up here ^^^^^^^^^^^^^^^^^^^^
 
     }
 
