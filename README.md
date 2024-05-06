@@ -43,4 +43,4 @@ Once the bot is in your server, you can start using its commands by typing the a
 
 ## License
 
-This project is licensed under the [GPL License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
