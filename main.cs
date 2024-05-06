@@ -63,6 +63,8 @@ namespace ZeDarkSide_Discord_Bot
             // Register commands
             Commands.RegisterCommands<Tools>();
             Commands.RegisterCommands<Gamble>();
+            Commands.RegisterCommands<Economy>();
+            Commands.RegisterCommands<DestinyTwo>();
             slashCommandsConfiguration.RegisterCommands<ToolsSlash>();
 
 
