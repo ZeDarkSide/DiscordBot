@@ -173,26 +173,6 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
         }
 
-        public class DestinyMilestoneResponse
-        {
-            public DestinyMilestoneResponseData Response { get; set; }
-        }
-
-        public class DestinyMilestoneResponseData
-        {
-            public Dictionary<string, DestinyMilestone> Milestones { get; set; }
-        }
-
-        public class DestinyMilestone
-        {
-            public DestinyDisplayProperties DisplayProperties { get; set; }
-        }
-
-        public class DestinyDisplayProperties
-        {
-            public string Name { get; set; }
-            // Add other properties you might need here
-        }
 
 
 
