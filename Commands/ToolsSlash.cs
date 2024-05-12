@@ -327,18 +327,20 @@ namespace ZeDarkSide_Discord_Bot.Commands
             int totalPayout = 0;
             string[] resultSymbols = { "", "", "" };
 
-            // Counter to track if the next slots should be a win
+            
 
 
-            // Check if the win counter has reached 3
+           
             if (winCounter >= 30)
             {
-                // Force a win by setting all symbols to ":seven:"
+                
+                Random rnds = new Random();
+                int slot = rnds.Next(0, 6);
                 for (int i = 0; i < 3; i++)
                 {
-                    resultSymbols[i] = $"**{symbols[6]}**";
+                    resultSymbols[i] = $"**{symbols[slot]}**";
                 }
-                // Reset the win counter
+                
                 int symbolIndex = Array.IndexOf(symbols, reels[0][0]);
                 int payout = payouts[symbolIndex] * (int)bet;
                 totalPayout += payout;
@@ -346,7 +348,8 @@ namespace ZeDarkSide_Discord_Bot.Commands
             }
             else
             {
-                // Generate random symbols as usual
+                
+
                 for (int i = 0; i < 3; i++)
                 {
                     var reelSymbols = new string[3];
@@ -358,30 +361,28 @@ namespace ZeDarkSide_Discord_Bot.Commands
                     reels.Add(reelSymbols);
                 }
 
-                // Check if all symbols in a reel match
+
                 if (reels[0][0] == reels[1][0] && reels[0][0] == reels[2][0])
                 {
-                    int symbolIndex = Array.IndexOf(symbols, reels[0][0]);
+                    string winningSymbol = reels[0][0];
+                    int symbolIndex = Array.IndexOf(symbols, winningSymbol);
                     int payout = payouts[symbolIndex] * (int)bet;
                     totalPayout += payout;
                     for (int i = 0; i < 3; i++)
                     {
-                        resultSymbols[i] = $"**{reels[0][0]}**";
+                        resultSymbols[i] = $"**{winningSymbol}**";
                     }
-                    // Increase the win counter
-                    // winCounter = 0;
-
                 }
                 else
                 {
-                    // No winning combination
+                    // No winning combination, set result symbols to show actual symbols
                     for (int i = 0; i < 3; i++)
                     {
-                        resultSymbols[i] = reels[0][i];
+                        resultSymbols[i] = reels[i][0];
                     }
-                    // Reset the win counter
                     winCounter++;
                 }
+
             }
             Console.WriteLine(winCounter);
             if (totalPayout > 0)
@@ -532,6 +533,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
         [SlashCommand("rob", "Rob someone")]
+        [Cooldown(1, 7200, CooldownBucketType.User)]
         public async Task RobSomeone(InteractionContext ctx, [Option("user", "The user to rob")] DiscordUser user)
         {
             var customColor = new DiscordColor(255, 71, 59);
@@ -562,10 +564,20 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
                 };
                 embedBuilder.WithFooter("Error codes Please user !!ErrorCode (error code) for more information");
-                await ctx.Channel.SendMessageAsync(embed: embedBuilder);
+                await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
 
             }
+            if (user.Id == ctx.User.Id)
+            {
+                var embedBuilder = new DiscordEmbedBuilder
+                {
+                    Title = $"ERROR 848",
+                    Description = $"Your trying to rob yourself Error 848...",
+                    Color = customColor,
 
+                };
+                await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
+            }
             if (File.Exists(filePath))
             {
                 string jsonData = File.ReadAllText(filePath);
@@ -684,7 +696,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
                 };
 
-                await ctx.Channel.SendMessageAsync(embed: embedBuilder);
+                await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
             }
             else if (WoL == 7 || WoL == 9 || WoL == 8)
             {
@@ -694,7 +706,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
                     Description = $"But made too many sounds and was about to be caught so they fled.",
                     Color = customColor,
                 };
-                await ctx.Channel.SendMessageAsync(embed: embedbuilder);
+                await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedbuilder));
             }
 
 

@@ -33,8 +33,8 @@ namespace ZeDarkSide_Discord_Bot
             var discordConfig = new DiscordConfiguration()
             {
                 Intents = DiscordIntents.All,
-               Token = jsonreader.token,
-              
+               // Token = jsonreader.token,
+                
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 ReconnectIndefinitely = true
@@ -65,6 +65,7 @@ namespace ZeDarkSide_Discord_Bot
             Commands.RegisterCommands<Gamble>();
             Commands.RegisterCommands<Economy>();
             Commands.RegisterCommands<DestinyTwo>();
+            Commands.RegisterCommands<BungieApi>();
             slashCommandsConfiguration.RegisterCommands<ToolsSlash>();
 
 

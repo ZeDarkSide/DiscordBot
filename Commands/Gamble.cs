@@ -27,275 +27,276 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
 
-        #region Old code For a onld system
-        /*        [Command("rob")]
-                [Cooldown(1, 7200, CooldownBucketType.User)]
-                public async Task RobSomeone(CommandContext ctx, DiscordMember user)
+
+        [Command("rob")]
+        [Cooldown(1, 7200, CooldownBucketType.User)]
+        public async Task RobSomeone(CommandContext ctx, DiscordMember user)
+        {
+
+            var customColor = new DiscordColor(255, 71, 59);
+            ulong allowedChannelId = 1114778208903122964;
+            if (ctx.Channel.Id == allowedChannelId && ctx.Channel.Id == 778062522888224788)
+            {
+                await ctx.RespondAsync("This command Has been moved to a / command");
+                return;
+            }
+
+
+            ulong userId = ctx.User.Id;
+            ulong Robuser = user.Id;
+            int userPoints = 0;
+            int robpoints = 0;
+
+            string filePath = "Bank.json";
+            JSONStructure data;
+
+            if (user.IsBot)
+            {
+                var embedBuilder = new DiscordEmbedBuilder
                 {
+                    Title = $"ERROR 847",
+                    Description = $"Bots can't interact with database Error 847...",
+                    Color = customColor,
 
-                    var customColor = new DiscordColor(255, 71, 59);
-                    ulong allowedChannelId = 1114778208903122964;
-                    if (ctx.Channel.Id != allowedChannelId && ctx.Channel.Id != 778062522888224788)
-                    {
-                        await ctx.RespondAsync("This command can only be used in the specified channel.");
-                        return;
-                    }
+                };
+                embedBuilder.WithFooter("Error codes Please user !!ErrorCode (error code) for more information");
+                await ctx.Channel.SendMessageAsync(embed: embedBuilder);
 
-
-                    ulong userId = ctx.User.Id;
-                    ulong Robuser = user.Id;
-                    int userPoints = 0;
-                    int robpoints = 0;
-
-                    string filePath = "Bank.json";
-                    JSONStructure data;
-
-                    if (user.IsBot)
-                    {
-                        var embedBuilder = new DiscordEmbedBuilder
-                        {
-                            Title = $"ERROR 847",
-                            Description = $"Bots can't interact with database Error 847...",
-                            Color = customColor,
-
-                        };
-                        embedBuilder.WithFooter("Error codes Please user !!ErrorCode (error code) for more information");
-                        await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-
-                    }
-                    else
-                    {
-                        if (File.Exists(filePath))
-                        {
-                            string jsonData = File.ReadAllText(filePath);
-                            data = JsonConvert.DeserializeObject<JSONStructure>(jsonData);
-                        }
-                        else
-                        {
-
-                            data = new JSONStructure { UserPoints = new Dictionary<ulong, int>() };
-                        }
-
-
-                        if (data.UserPoints == null)
-                        {
-                            data.UserPoints = new Dictionary<ulong, int>();
-                        }
-
-
-
-
-                        if (data != null)
-                        {
-
-                            if (data.UserPoints == null)
-                            {
-                                data.UserPoints = new Dictionary<ulong, int>();
-                            }
-
-                            if (data.UserPoints.ContainsKey(userId))
-                            {
-                                // If user ID exists, retrieve their points
-                                userPoints = data.UserPoints[userId];
-                            }
-                            else
-                            {
-
-                                data.UserPoints[userId] = 500;
-                                userPoints = 500;
-
-                                string updatedJsonData = JsonConvert.SerializeObject(data);
-                                File.WriteAllText(filePath, updatedJsonData);
-                            }
-
-                        }
-                        if (data != null)
-                        {
-
-                            if (data.UserPoints == null)
-                            {
-                                data.UserPoints = new Dictionary<ulong, int>();
-                            }
-
-                            if (data.UserPoints.ContainsKey(Robuser))
-                            {
-                                // If user ID exists, retrieve their points
-                                robpoints = data.UserPoints[Robuser];
-                            }
-                            else
-                            {
-
-                                data.UserPoints[Robuser] = 500;
-                                robpoints = 500;
-
-
-                                string updatedJsonData = JsonConvert.SerializeObject(data);
-                                File.WriteAllText(filePath, updatedJsonData);
-                            }
-
-                        }
-
-
-                        // await ctx.Channel.SendMessageAsync($"user {ctx.User.Username} has {userPoints} and user 2 {user.Username} has {robpoints}");
-
-                        Random rnd = new Random();
-                        int WoL = rnd.Next(1, 9);
-                        if (WoL == 1 || WoL == 3 || WoL == 5)
-                        {
-                            Random rnds = new Random();
-                            int WoLs = rnd.Next(1, robpoints);
-
-                            data.UserPoints[userId] += WoLs;
-                            userPoints = data.UserPoints[userId];
-                            string updatedJsonData1 = JsonConvert.SerializeObject(data);
-                            File.WriteAllText(filePath, updatedJsonData1);
-
-                            data.UserPoints[Robuser] -= WoLs;
-                            robpoints = data.UserPoints[Robuser];
-
-
-                            string updatedJsonData11 = JsonConvert.SerializeObject(data);
-                            File.WriteAllText(filePath, updatedJsonData11);
-
-                            var embedBuilder = new DiscordEmbedBuilder
-                            {
-                                Title = $"{ctx.User.Username} Robbed {user.Username}",
-                                Description = $"For ${WoLs}",
-                                Color = customColor
-
-                            };
-
-                            await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-                        }
-                        else if (WoL == 2 || WoL == 4 || WoL == 6)
-                        {
-                            Random rnds = new Random();
-                            int WoLs = rnd.Next(1, userPoints);
-
-                            data.UserPoints[userId] -= WoLs;
-                            userPoints = data.UserPoints[userId];
-                            string updatedJsonData1 = JsonConvert.SerializeObject(data);
-                            File.WriteAllText(filePath, updatedJsonData1);
-
-                            data.UserPoints[Robuser] += WoLs;
-                            robpoints = data.UserPoints[Robuser];
-                            string updatedJsonData11 = JsonConvert.SerializeObject(data);
-                            File.WriteAllText(filePath, updatedJsonData11);
-
-                            var embedBuilder = new DiscordEmbedBuilder
-                            {
-                                Title = $"{ctx.User.Username} Tried to Rob {user.Username}",
-                                Description = $"But {user.Username} caught {ctx.User.Username} and stole ${WoLs} from them!",
-                                Color = customColor,
-
-                            };
-
-                            await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-                        }else if (WoL == 7 || WoL == 9 || WoL == 8)
-                        {
-                            var embedbuilder = new DiscordEmbedBuilder
-                            {
-                                Title = $"{ctx.User.Username} Tried to Rob {user.Username}",
-                                Description = $"But made too many sounds and was about to be caught.",
-                                Color = customColor,
-                            };
-                            await ctx.Channel.SendMessageAsync(embed: embedbuilder);
-                        }
-                    }
-
-
-
-
+            }
+            else
+            {
+                if (File.Exists(filePath))
+                {
+                    string jsonData = File.ReadAllText(filePath);
+                    data = JsonConvert.DeserializeObject<JSONStructure>(jsonData);
                 }
-        */
-        /*        [Command("leaderboard")]
-                public async Task Leaderboard(CommandContext ctx)
+                else
                 {
 
-                    var customColor = new DiscordColor(255, 71, 59);
-                    ulong allowedChannelId = 1114778208903122964;
-
-                    if (ctx.Channel.Id != allowedChannelId)
-                    {
-                        await ctx.RespondAsync("This command can only be used in the specified channel.");
-                        return;
-                    }
+                    data = new JSONStructure { UserPoints = new Dictionary<ulong, int>() };
+                }
 
 
-                    string filePath = "Bank.json";
-                    JSONStructure data;
+                if (data.UserPoints == null)
+                {
+                    data.UserPoints = new Dictionary<ulong, int>();
+                }
 
-                    if (File.Exists(filePath))
-                    {
-                        string jsonData = File.ReadAllText(filePath);
-                        data = JsonConvert.DeserializeObject<JSONStructure>(jsonData);
-                    }
-                    else
-                    {
-                        data = new JSONStructure { UserPoints = new Dictionary<ulong, int>() };
-                    }
+
+
+
+                if (data != null)
+                {
 
                     if (data.UserPoints == null)
                     {
                         data.UserPoints = new Dictionary<ulong, int>();
                     }
-                    var sortedUsers = data.UserPoints.OrderByDescending(x => x.Value);
 
-
-                    var top10Users = sortedUsers.Take(10);
-
-
-                    var eleventhUser = sortedUsers.Skip(10).FirstOrDefault();
-
-
-                    var embedBuilder = new DiscordEmbedBuilder
+                    if (data.UserPoints.ContainsKey(userId))
                     {
-                        Title = "Top 10 Leaderboard",
-                        Color = customColor
-                    };
-
-                    int rank = 1;
-                    foreach (var user in top10Users)
-                    {
-
-                        var member = await ctx.Guild.GetMemberAsync(user.Key);
-
-
-                        embedBuilder.AddField($"Rank {rank}", $"{member.Username}: ${user.Value}", inline: false);
-                        rank++;
-                    }
-
-
-                    while (rank <= 10)
-                    {
-                        embedBuilder.AddField($"Rank {rank}", "*Empty Slot*", inline: false);
-                        rank++;
-                    }
-
-
-                    if (eleventhUser.Key != default)
-                    {
-                        var eleventhMember = await ctx.Guild.GetMemberAsync(eleventhUser.Key);
-                        embedBuilder.WithFooter($"11th Place: {eleventhMember.Username}");
+                        // If user ID exists, retrieve their points
+                        userPoints = data.UserPoints[userId];
                     }
                     else
                     {
-                        embedBuilder.WithFooter("*No 11th Place*");
+
+                        data.UserPoints[userId] = 500;
+                        userPoints = 500;
+
+                        string updatedJsonData = JsonConvert.SerializeObject(data);
+                        File.WriteAllText(filePath, updatedJsonData);
                     }
 
+                }
+                if (data != null)
+                {
+
+                    if (data.UserPoints == null)
+                    {
+                        data.UserPoints = new Dictionary<ulong, int>();
+                    }
+
+                    if (data.UserPoints.ContainsKey(Robuser))
+                    {
+                        // If user ID exists, retrieve their points
+                        robpoints = data.UserPoints[Robuser];
+                    }
+                    else
+                    {
+
+                        data.UserPoints[Robuser] = 500;
+                        robpoints = 500;
+
+
+                        string updatedJsonData = JsonConvert.SerializeObject(data);
+                        File.WriteAllText(filePath, updatedJsonData);
+                    }
+
+                }
+
+
+                // await ctx.Channel.SendMessageAsync($"user {ctx.User.Username} has {userPoints} and user 2 {user.Username} has {robpoints}");
+
+                Random rnd = new Random();
+                int WoL = rnd.Next(1, 9);
+                if (WoL == 1 || WoL == 3 || WoL == 5)
+                {
+                    Random rnds = new Random();
+                    int WoLs = rnd.Next(1, robpoints);
+
+                    data.UserPoints[userId] += WoLs;
+                    userPoints = data.UserPoints[userId];
+                    string updatedJsonData1 = JsonConvert.SerializeObject(data);
+                    File.WriteAllText(filePath, updatedJsonData1);
+
+                    data.UserPoints[Robuser] -= WoLs;
+                    robpoints = data.UserPoints[Robuser];
+
+
+                    string updatedJsonData11 = JsonConvert.SerializeObject(data);
+                    File.WriteAllText(filePath, updatedJsonData11);
+
+                    var embedBuilder = new DiscordEmbedBuilder
+                    {
+                        Title = $"{ctx.User.Username} Robbed {user.Username}",
+                        Description = $"For ${WoLs}",
+                        Color = customColor
+
+                    };
 
                     await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-                }*/
-/*        [Command("bank")]
+                }
+                else if (WoL == 2 || WoL == 4 || WoL == 6)
+                {
+                    Random rnds = new Random();
+                    int WoLs = rnd.Next(1, userPoints);
+
+                    data.UserPoints[userId] -= WoLs;
+                    userPoints = data.UserPoints[userId];
+                    string updatedJsonData1 = JsonConvert.SerializeObject(data);
+                    File.WriteAllText(filePath, updatedJsonData1);
+
+                    data.UserPoints[Robuser] += WoLs;
+                    robpoints = data.UserPoints[Robuser];
+                    string updatedJsonData11 = JsonConvert.SerializeObject(data);
+                    File.WriteAllText(filePath, updatedJsonData11);
+
+                    var embedBuilder = new DiscordEmbedBuilder
+                    {
+                        Title = $"{ctx.User.Username} Tried to Rob {user.Username}",
+                        Description = $"But {user.Username} caught {ctx.User.Username} and stole ${WoLs} from them!",
+                        Color = customColor,
+
+                    };
+
+                    await ctx.Channel.SendMessageAsync(embed: embedBuilder);
+                }
+                else if (WoL == 7 || WoL == 9 || WoL == 8)
+                {
+                    var embedbuilder = new DiscordEmbedBuilder
+                    {
+                        Title = $"{ctx.User.Username} Tried to Rob {user.Username}",
+                        Description = $"But made too many sounds and was about to be caught.",
+                        Color = customColor,
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embedbuilder);
+                }
+            }
+
+
+
+
+        }
+
+        [Command("leaderboard")]
+        public async Task Leaderboard(CommandContext ctx)
+        {
+
+            var customColor = new DiscordColor(255, 71, 59);
+            ulong allowedChannelId = 1114778208903122964;
+
+            if (ctx.Channel.Id == allowedChannelId && ctx.Channel.Id == 778062522888224788)
+            {
+                await ctx.RespondAsync("This command Has been moved to a / command");
+                return;
+            }
+
+
+            string filePath = "Bank.json";
+            JSONStructure data;
+
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
+                data = JsonConvert.DeserializeObject<JSONStructure>(jsonData);
+            }
+            else
+            {
+                data = new JSONStructure { UserPoints = new Dictionary<ulong, int>() };
+            }
+
+            if (data.UserPoints == null)
+            {
+                data.UserPoints = new Dictionary<ulong, int>();
+            }
+            var sortedUsers = data.UserPoints.OrderByDescending(x => x.Value);
+
+
+            var top10Users = sortedUsers.Take(10);
+
+
+            var eleventhUser = sortedUsers.Skip(10).FirstOrDefault();
+
+
+            var embedBuilder = new DiscordEmbedBuilder
+            {
+                Title = "Top 10 Leaderboard",
+                Color = customColor
+            };
+
+            int rank = 1;
+            foreach (var user in top10Users)
+            {
+
+                var member = await ctx.Guild.GetMemberAsync(user.Key);
+
+
+                embedBuilder.AddField($"Rank {rank}", $"{member.Username}: ${user.Value}", inline: false);
+                rank++;
+            }
+
+
+            while (rank <= 10)
+            {
+                embedBuilder.AddField($"Rank {rank}", "*Empty Slot*", inline: false);
+                rank++;
+            }
+
+
+            if (eleventhUser.Key != default)
+            {
+                var eleventhMember = await ctx.Guild.GetMemberAsync(eleventhUser.Key);
+                embedBuilder.WithFooter($"11th Place: {eleventhMember.Username}");
+            }
+            else
+            {
+                embedBuilder.WithFooter("*No 11th Place*");
+            }
+
+
+            await ctx.Channel.SendMessageAsync(embed: embedBuilder);
+        }
+        [Command("bank")]
         [Cooldown(1, 5, CooldownBucketType.User)]
         public async Task SeeHowMuchInBank(CommandContext ctx)
         {
             var customColor = new DiscordColor(255, 71, 59);
             ulong allowedChannelId = 1114778208903122964;
 
-            if (ctx.Channel.Id != allowedChannelId && ctx.Channel.Id != 778062522888224788)
+            if (ctx.Channel.Id == allowedChannelId && ctx.Channel.Id == 778062522888224788)
             {
-                await ctx.RespondAsync("This command can only be used in the specified channel.");
+                await ctx.RespondAsync("This command Has been moved to a / command");
                 return;
             }
 
@@ -405,8 +406,19 @@ namespace ZeDarkSide_Discord_Bot.Commands
             embedBuilder.WithThumbnail(ctx.User.AvatarUrl);
 
             await ctx.Channel.SendMessageAsync(embed: embedBuilder);
-        }*/
-        #endregion
+        }
+
+
+
+
+
+
+
+
+
+
+
+
     }
     public class JSONStructure
     {
