@@ -65,6 +65,10 @@
               "target": "Package",
               "version": "[4.4.6, )"
             },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.61, )"
+            },
             "Microsoft.Bcl.AsyncInterfaces": {
               "target": "Package",
               "version": "[8.0.0, )"

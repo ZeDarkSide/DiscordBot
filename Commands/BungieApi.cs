@@ -16,11 +16,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using System.Text.RegularExpressions;
+using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using System.Drawing;
+using System.Net.Http;
+
+
 
 namespace ZeDarkSide_Discord_Bot.Commands
 {
@@ -29,16 +30,25 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
 
-        private const string BUNGIE_API_KEY = "blank";
+        private const string BUNGIE_API_KEY = "";
         private const string BUNGIE_API_URL = "https://www.bungie.net/Platform";
         private const string API_URL = "https://example.com/api/weapons";
        
 
         [Command("weekly")]
+        [Cooldown(1,20,CooldownBucketType.Global)]
         public async Task Weekly(CommandContext ctx)
         {
+
+            var loadingMessage = await ctx.RespondAsync("Loading data...");
             string RaidInfo = "";
             string imageUrl = "";
+            string LostSectorName = "";
+            string NightfallName = "";
+            string WeeklyExoticMission = "";
+            string WeeklyRaid = "";
+            string WeeklyDungeon = "";
+
             var client = new RestClient(BUNGIE_API_URL);
             var request = new RestRequest("/Destiny2/Milestones/", Method.Get);
             request.AddHeader("X-API-Key", BUNGIE_API_KEY);
@@ -46,8 +56,61 @@ namespace ZeDarkSide_Discord_Bot.Commands
             var response = await client.ExecuteAsync(request);
 
             var jsonResponse = JObject.Parse(response.Content);
+            using (var httpClient = new HttpClient())
+            {
+                var htmlContent = await httpClient.GetStringAsync("https://todayindestiny.com/");
+                var lostSectorName = GetLostSectorName(htmlContent);
+                var nightfallName = GetNightfallName(htmlContent);
+                var weeklyExoticMission = GetWeeklyExoticMission(htmlContent);
+                var weeklyraid = GetWeeklyRaid(htmlContent);
+                var weeklydungeon = GetWeeklyDungeon(htmlContent);
 
-            if (jsonResponse["Response"] != null && jsonResponse["Response"][541780856.ToString()] != null)
+                if (!string.IsNullOrEmpty(lostSectorName))
+                {
+                    LostSectorName = lostSectorName;
+                }
+                else
+                {
+                    LostSectorName = "Unknown";
+                }
+
+                if (!string.IsNullOrEmpty(nightfallName))
+                {
+                    NightfallName = nightfallName;
+                }
+                else
+                {
+                    NightfallName = "Unknown";
+                }
+
+                if (!string.IsNullOrEmpty(weeklyExoticMission))
+                {
+                    WeeklyExoticMission = weeklyExoticMission;
+                }
+                else
+                {
+                    WeeklyExoticMission = "Unknown";
+                }
+                if (!string.IsNullOrEmpty(weeklyraid))
+                {
+                    WeeklyRaid = weeklyraid;
+                }
+                else
+                {
+                    WeeklyRaid = "Unknown";
+                }
+                if (!string.IsNullOrEmpty(weeklydungeon))
+                {
+                    WeeklyDungeon = weeklydungeon;
+                }
+                else
+                {
+                    WeeklyDungeon = "Unknown";
+                }
+            }
+
+
+/*            if (jsonResponse["Response"] != null && jsonResponse["Response"][541780856.ToString()] != null)
             {
                 var activityHash = jsonResponse["Response"][541780856.ToString()]["activities"][0]["activityHash"].ToString();
 
@@ -58,22 +121,22 @@ namespace ZeDarkSide_Discord_Bot.Commands
                     if (activityHashLong == 910380154)
                     {
                         RaidInfo = "Deep Stone Crypt";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/03/Deep-Stone-Crypt-Destiny-2-900p.jpg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/europa-raid-deep-stone-crypt.jpg";
                     }
                     else if (activityHashLong == 4179289725)
                     {
                         RaidInfo = "Crota's End";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2023/08/Crotas-End-Raid-gameplay-Destiny-2-1536x864.jpg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_Crotas_end.jpg";
                     }
                     else if (activityHashLong == 2381413764)
                     {
                         RaidInfo = "Root of Nightmares";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2023/03/Root-of-Nightmares-Raid-Featured-Destiny-2-1536x864.jpg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_root_of_nightmares.jpg";
                     }
                     else if (activityHashLong == 1374392663)
                     {
                         RaidInfo = "King's Fall";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/08/Kings-Fall-Destiny-2-900p-1536x864.jpg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_nemesis.jpg";
                     }
                     else if (activityHashLong == 1441982566)
                     {
@@ -83,17 +146,17 @@ namespace ZeDarkSide_Discord_Bot.Commands
                     else if (activityHashLong == 3458480158)
                     {
                         RaidInfo = "Garden of Salvation";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/01/Garden-of-Salvation-Destiny-2-900p-1536x864.jpeg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_garden_of_salvation.jpg";
                     }
                     else if (activityHashLong == 2122313384)
                     {
                         RaidInfo = "Last Wish";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/01/Last-Wish-raid-Destiny-2-900p-1536x864.jpeg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_beanstalk.jpg";
                     }
                     else if (activityHashLong == 3881495763)
                     {
                         RaidInfo = "Vault of Glass";
-                        imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/03/Vault-of-Glass-Destiny-2-900p.jpg";
+                        imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/vault_of_glass.jpg";
                     }
                     else
                     {
@@ -159,22 +222,166 @@ namespace ZeDarkSide_Discord_Bot.Commands
             else
             {
                 await ctx.RespondAsync("Error: Request not found if you think this is a issue report it to the developer!");
+            }*/
+
+            if (WeeklyRaid == "Deep Stone Crypt")
+            {
+                RaidInfo = "Deep Stone Crypt";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/europa-raid-deep-stone-crypt.jpg";
+            }
+            else if (WeeklyRaid == "Crota's End")
+            {
+                RaidInfo = "Crota's End";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_Crotas_end.jpg";
+            }
+            else if (WeeklyRaid == "Root of Nightmares")
+            {
+                RaidInfo = "Root of Nightmares";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_root_of_nightmares.jpg";
+            }
+            else if (WeeklyRaid == "Kings Fall")
+            {
+                RaidInfo = "King's Fall";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_nemesis.jpg";
+            }
+            else if (WeeklyRaid == "Vow of the Disciple")
+            {
+                RaidInfo = "Vow of the Disciple";
+                imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/03/Vow-of-the-Disciple-Destiny-2-900p-1-1536x864.jpg";
+            }
+            else if (WeeklyRaid == "Garden of Salvation")
+            {
+                RaidInfo = "Garden of Salvation";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_garden_of_salvation.jpg";
+            }
+            else if (WeeklyRaid == "Last Wish")
+            {
+                RaidInfo = "Last Wish";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_beanstalk.jpg";
+            }
+            else if (WeeklyRaid == "Vault of Glass")
+            {
+                RaidInfo = "Vault of Glass";
+                imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/vault_of_glass.jpg";
             }
 
 
+
+            await loadingMessage.DeleteAsync();
             var embedBuilder = new DiscordEmbedBuilder()
                 .WithTitle("Weekly Rotation")
-                .AddField("Raid", $"**{RaidInfo}**", inline: true)
-                .AddField("Dungeon", $"**{DungeonInfo}**", inline: true)
+                .AddField("Raid", $"**{WeeklyRaid}\nCrota's End**", inline: true)
+                .AddField("Dungeon", $"**{WeeklyDungeon}\nWarlord's Ruin**", inline: true)
+                .AddField("Updates Daily \nLost Sector", $"**{LostSectorName}**", inline: false)
+                .AddField("NightFall", $"**{NightfallName}**", inline: true)
+                .AddField("Weekly Exotic Mission", $"**{WeeklyExoticMission}**", inline: true)
                 .WithImageUrl(imageUrl)
                 .WithColor(new DiscordColor("#ff473b"));
+            await ctx.Message.DeleteAsync();
+            await ctx.RespondAsync(embed: embedBuilder.Build());
 
-            await ctx.RespondAsync(embed: embedBuilder);
 
         }
 
+        
+        public string GetLostSectorName(string htmlContent)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(htmlContent);
 
+            var lostSectorHeader = doc.DocumentNode.SelectSingleNode("//p[@class='eventCardHeaderSet' and contains(text(), 'Lost Sector')]");
 
+            if (lostSectorHeader != null)
+            {
+                var lostSectorNameNode = lostSectorHeader.NextSibling;
+                if (lostSectorNameNode != null && lostSectorNameNode.Name == "p" && lostSectorNameNode.GetAttributeValue("class", "") == "eventCardHeaderName")
+                {
+                    string lostSectorName = lostSectorNameNode.InnerText.Trim();
+                    return lostSectorName;
+                }
+            }
+
+            return null;
+        }
+        public string GetNightfallName(string htmlContent)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(htmlContent);
+
+            var nightfallHeader = doc.DocumentNode.SelectSingleNode("//p[@class='eventCardHeaderSet' and contains(text(), 'Nightfall')]");
+
+            if (nightfallHeader != null)
+            {
+                var nightfallNameNode = nightfallHeader.NextSibling;
+                if (nightfallNameNode != null && nightfallNameNode.Name == "p" && nightfallNameNode.GetAttributeValue("class", "") == "eventCardHeaderName")
+                {
+                    string nightfallName = nightfallNameNode.InnerText.Trim();
+                    return nightfallName;
+                }
+            }
+
+            return null;
+        }
+        public string GetWeeklyExoticMission(string htmlContent)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(htmlContent);
+
+            var weeklyExoticMissionHeader = doc.DocumentNode.SelectSingleNode("//p[@class='eventCardHeaderSet' and contains(text(), 'Weekly Exotic Mission')]");
+
+            if (weeklyExoticMissionHeader != null)
+            {
+                var weeklyExoticMissionNameNode = weeklyExoticMissionHeader.NextSibling;
+                if (weeklyExoticMissionNameNode != null && weeklyExoticMissionNameNode.Name == "p" && weeklyExoticMissionNameNode.GetAttributeValue("class", "") == "eventCardHeaderName")
+                {
+                    string weeklyExoticMissionName = weeklyExoticMissionNameNode.InnerText.Trim();
+                    return weeklyExoticMissionName;
+                }
+            }
+
+            return null;
+        }
+        public string GetWeeklyRaid(string htmlContent)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(htmlContent);
+
+            var weeklyExoticRaidHeader = doc.DocumentNode.SelectSingleNode("//p[@class='eventCardHeaderSet' and contains(text(), 'Weekly Raid')]");
+
+            if (weeklyExoticRaidHeader != null)
+            {
+                var weeklyExoticRaidNameNode = weeklyExoticRaidHeader.NextSibling;
+                if (weeklyExoticRaidNameNode != null && weeklyExoticRaidNameNode.Name == "p" && weeklyExoticRaidNameNode.GetAttributeValue("class", "") == "eventCardHeaderName")
+                {
+                    string weeklyExoticRaidName = weeklyExoticRaidNameNode.InnerText.Trim();
+                    return weeklyExoticRaidName;
+                }
+            }
+
+            return null;
+        }
+        public string GetWeeklyDungeon(string htmlContent)
+        {
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(htmlContent);
+
+            var weeklyExoticDungeonHeader = doc.DocumentNode.SelectSingleNode("//p[@class='eventCardHeaderSet' and contains(text(), 'Weekly Dungeon')]");
+
+            if (weeklyExoticDungeonHeader != null)
+            {
+                var weeklyExoticDungeonNameNode = weeklyExoticDungeonHeader.NextSibling;
+                if (weeklyExoticDungeonNameNode != null && weeklyExoticDungeonNameNode.Name == "p" && weeklyExoticDungeonNameNode.GetAttributeValue("class", "") == "eventCardHeaderName")
+                {
+                    string weeklyExoticDungeonName = weeklyExoticDungeonNameNode.InnerText.Trim();
+                    return weeklyExoticDungeonName;
+                }
+            }
+
+            return null;
+        }
 
     }
+
+
+
 }

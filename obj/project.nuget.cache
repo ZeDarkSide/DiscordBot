@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yf7de138iBo=",
+  "dgSpecHash": "0fqmiO6eGL4=",
   "success": true,
   "projectFilePath": "E:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\chanc\\.nuget\\packages\\dsharpplus.commandsnext\\4.4.6\\dsharpplus.commandsnext.4.4.6.nupkg.sha512",
     "C:\\Users\\chanc\\.nuget\\packages\\dsharpplus.interactivity\\4.4.6\\dsharpplus.interactivity.4.4.6.nupkg.sha512",
     "C:\\Users\\chanc\\.nuget\\packages\\dsharpplus.slashcommands\\4.4.6\\dsharpplus.slashcommands.4.4.6.nupkg.sha512",
+    "C:\\Users\\chanc\\.nuget\\packages\\htmlagilitypack\\1.11.61\\htmlagilitypack.1.11.61.nupkg.sha512",
     "C:\\Users\\chanc\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\8.0.0\\microsoft.bcl.asyncinterfaces.8.0.0.nupkg.sha512",
     "C:\\Users\\chanc\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\chanc\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",

@@ -246,13 +246,13 @@ namespace ZeDarkSide_Discord_Bot.Commands
         private readonly string[] symbols = { ":cherries:", ":lemon:", ":grapes:", ":watermelon:", ":tangerine:", ":bell:", ":seven:" };
         private readonly int[] payouts = { 2, 3, 5, 10, 15, 20, 50 };
         public static int winCounter = 0;
-        [Cooldown(1, 10, CooldownBucketType.User)]
+       
         [SlashCommand("slots", "Gamble on slots")]
         public async Task SlashSlots(InteractionContext ctx, [Option("bet", "The amount to bet")] long bet)
         {
             var customColor = new DiscordColor(255, 71, 59);
             ulong allowedChannelId = 1114778208903122964;
-            string results = "";
+          
             if (ctx.Channel.Id != allowedChannelId && ctx.Channel.Id != 778062522888224788)
             {
                 await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("This command can only be used in the specified channel."));
@@ -427,7 +427,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
         [SlashCommand("gamble", "Gamble your life away")]
-        [Cooldown(1, 10, CooldownBucketType.User)]
+        
         public async Task GambleAway(InteractionContext ctx, [Option("bet", "The amount to bet")] long bet)
         {
             var customColor = new DiscordColor(255, 71, 59);
@@ -533,7 +533,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
         [SlashCommand("rob", "Rob someone")]
-        [Cooldown(1, 7200, CooldownBucketType.User)]
+        
         public async Task RobSomeone(InteractionContext ctx, [Option("user", "The user to rob")] DiscordUser user)
         {
             var customColor = new DiscordColor(255, 71, 59);

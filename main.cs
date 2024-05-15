@@ -32,9 +32,20 @@ namespace ZeDarkSide_Discord_Bot
 
             var discordConfig = new DiscordConfiguration()
             {
-                Intents = DiscordIntents.All,
-               // Token = jsonreader.token,
-                
+                Intents = DiscordIntents.DirectMessageReactions
+    | DiscordIntents.DirectMessages
+    | DiscordIntents.GuildBans
+    | DiscordIntents.GuildEmojis
+    | DiscordIntents.GuildInvites
+    | DiscordIntents.GuildMembers
+    | DiscordIntents.GuildMessages
+    | DiscordIntents.MessageContents
+    | DiscordIntents.GuildIntegrations
+    | DiscordIntents.Guilds
+    | DiscordIntents.GuildVoiceStates
+    | DiscordIntents.GuildWebhooks,
+                Token = jsonreader.token,
+              
                 TokenType = TokenType.Bot,
                 AutoReconnect = true,
                 ReconnectIndefinitely = true
@@ -89,7 +100,7 @@ namespace ZeDarkSide_Discord_Bot
                 var coolDownMessage = new DiscordEmbedBuilder
                 {
                     Color = DiscordColor.Red,
-                    Title = "Please let the bot rest for a second!",
+                    Title = "You are being rate limited let the api cooldown!",
                     Description = $"Time Remaining: {timeLeft}"
                 };
 

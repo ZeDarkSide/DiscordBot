@@ -25,3 +25,4 @@ E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSi
 E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.genruntimeconfig.cache
 E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ref\ZeDarkSide Discord Bot.dll
 E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\RestSharp.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\HtmlAgilityPack.dll

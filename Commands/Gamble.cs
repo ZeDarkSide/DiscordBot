@@ -29,13 +29,17 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
         [Command("rob")]
-        [Cooldown(1, 7200, CooldownBucketType.User)]
         public async Task RobSomeone(CommandContext ctx, DiscordMember user)
         {
 
             var customColor = new DiscordColor(255, 71, 59);
             ulong allowedChannelId = 1114778208903122964;
-            if (ctx.Channel.Id == allowedChannelId && ctx.Channel.Id == 778062522888224788)
+            if (ctx.Channel.Id != allowedChannelId && ctx.Channel.Id != 778062522888224788)
+            {
+                await ctx.RespondAsync("This command Has been moved to a / command");
+                return;
+            }
+            else
             {
                 await ctx.RespondAsync("This command Has been moved to a / command");
                 return;
@@ -216,7 +220,12 @@ namespace ZeDarkSide_Discord_Bot.Commands
             var customColor = new DiscordColor(255, 71, 59);
             ulong allowedChannelId = 1114778208903122964;
 
-            if (ctx.Channel.Id == allowedChannelId && ctx.Channel.Id == 778062522888224788)
+            if (ctx.Channel.Id != allowedChannelId && ctx.Channel.Id != 778062522888224788)
+            {
+                await ctx.RespondAsync("This command Has been moved to a / command");
+                return;
+            }
+            else
             {
                 await ctx.RespondAsync("This command Has been moved to a / command");
                 return;
@@ -287,14 +296,19 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
             await ctx.Channel.SendMessageAsync(embed: embedBuilder);
         }
+
         [Command("bank")]
-        [Cooldown(1, 5, CooldownBucketType.User)]
         public async Task SeeHowMuchInBank(CommandContext ctx)
         {
             var customColor = new DiscordColor(255, 71, 59);
             ulong allowedChannelId = 1114778208903122964;
 
-            if (ctx.Channel.Id == allowedChannelId && ctx.Channel.Id == 778062522888224788)
+            if (ctx.Channel.Id != allowedChannelId && ctx.Channel.Id != 778062522888224788)
+            {
+                await ctx.RespondAsync("This command Has been moved to a / command");
+                return;
+            }
+            else
             {
                 await ctx.RespondAsync("This command Has been moved to a / command");
                 return;

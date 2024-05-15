@@ -31,7 +31,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
         {
             if (ctx.User.Id == 1114778208903122964 || ctx.User.Id == 653805970610192394)
             {
-                if (user.Id == null || user.Id == 0)
+                if ( user.Id == 0)
                 {
                     var noUser1 = new DiscordEmbedBuilder
                     {
@@ -108,7 +108,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
         {
             if (ctx.User.Id == 1114778208903122964 || ctx.User.Id == 653805970610192394)
             {
-                if (user.Id == null || user.Id == 0)
+                if (user.Id == 0)
                 {
                     var noUser1 = new DiscordEmbedBuilder
                     {
@@ -368,7 +368,83 @@ namespace ZeDarkSide_Discord_Bot.Commands
         #endregion
 
 
+        private Dictionary<ulong, DateTime> lastDailyUse = new Dictionary<ulong, DateTime>();
 
+        [Command("daily")]
+        public async Task Daily(CommandContext ctx)
+        {
+            var customColor = new DiscordColor(255, 71, 59);
+            ulong userId = ctx.User.Id;
+            int userPoints = 0;
+
+            if (lastDailyUse.ContainsKey(userId))
+            {
+                TimeSpan timeSinceLastUse = DateTime.Now - lastDailyUse[userId];
+                if (timeSinceLastUse.TotalHours < 24)
+                {
+                    var remainingTime = TimeSpan.FromHours(24) - timeSinceLastUse;
+                    var embedBuilders = new DiscordEmbedBuilder
+                    {
+                        Title = $"You've already claimed your daily reward! Next claim available in {remainingTime.Hours} hours and {remainingTime.Minutes} minutes.",
+                        Color = customColor,
+                    };
+                    await ctx.RespondAsync(embed: embedBuilders);
+                    return;
+                }
+            }
+
+            string filePath = "Bank.json";
+            JSONStructure data;
+
+            if (File.Exists(filePath))
+            {
+                string jsonData = File.ReadAllText(filePath);
+                data = JsonConvert.DeserializeObject<JSONStructure>(jsonData);
+            }
+            else
+            {
+                data = new JSONStructure { UserPoints = new Dictionary<ulong, int>() };
+            }
+
+            if (data.UserPoints == null)
+            {
+                data.UserPoints = new Dictionary<ulong, int>();
+            }
+
+            if (data != null)
+            {
+                if (data.UserPoints == null)
+                {
+                    data.UserPoints = new Dictionary<ulong, int>();
+                }
+
+                if (data.UserPoints.ContainsKey(userId))
+                {
+                    userPoints = data.UserPoints[userId];
+                }
+                else
+                {
+                    data.UserPoints[userId] = 500;
+                    userPoints = 500;
+                    string updatedJsonData1 = JsonConvert.SerializeObject(data);
+                    File.WriteAllText(filePath, updatedJsonData1);
+                }
+            }
+
+            data.UserPoints[userId] += 1000;
+            userPoints = data.UserPoints[userId];
+            lastDailyUse[userId] = DateTime.Now; // Record the time of daily usage
+            string updatedJsonData = JsonConvert.SerializeObject(data);
+            File.WriteAllText(filePath, updatedJsonData);
+
+            var embedBuilder = new DiscordEmbedBuilder
+            {
+                Title = $"$1000 has been added to your account! Bank = {userPoints}",
+                Description = "Come back in 24hrs",
+                Color = customColor,
+            };
+            await ctx.RespondAsync(embed: embedBuilder);
+        }
 
 
 
