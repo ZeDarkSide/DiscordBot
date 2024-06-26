@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using System.IO;
 using ZeDarkSide_Discord_Bot.config;
 using Microsoft.VisualBasic;
+using ZeDarkSide_Discord_Bot.Data;
 
 namespace ZeDarkSide_Discord_Bot.Commands
 {
@@ -28,12 +29,17 @@ namespace ZeDarkSide_Discord_Bot.Commands
             var customColor = new DiscordColor(255, 71, 59);
             ulong allowedChannelId = 1114778208903122964;
 
-            if (ctx.Channel.Id != allowedChannelId)
+            if (ctx.Channel.Id != allowedChannelId )
             {
+                if (ctx.User.Id == 653805970610192394)
+                {
 
+                }else
+                {
+                    await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("This command can only be used in the specified channel."));
+                    return;
+                }
 
-                await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().WithContent("This command can only be used in the specified channel."));
-                return;
             }
 
             ulong userId = ctx.User.Id;
@@ -151,7 +157,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 string itemsString = string.Join("\n", userItems.Select(item => $"- {item}"));
                 embedBuilder.AddField("Owned Items", itemsString);
             }
-            embedBuilder.WithFooter("\n\nIf your roles are not correct like missing sub role please contact chancethekiller900");
+            embedBuilder.WithFooter("\n\nIf your roles are not correct like missing sub role please contact chancethekiller900", "https://images-ext-1.discordapp.net/external/OF0r3zkCIyqBD9kLTZDqZ0Sv-2sblM0-ZpdRwNRPbxs/https/img.icons8.com/cotton/64/000000/info.png");
             embedBuilder.WithThumbnail(ctx.User.AvatarUrl);
 
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
@@ -202,7 +208,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
             var embedBuilder = new DiscordEmbedBuilder
             {
                 Title = "Top 10 Leaderboard",
-                Color = DiscordColor.Red
+                Color = new DiscordColor("#ff473b")
             };
 
             int rank = 1;
@@ -240,7 +246,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
 
 
-
+        private Dictionary<ulong, DateTime> lastRobUse = new Dictionary<ulong, DateTime>();
 
         #region Econonmy / commands
         private readonly string[] symbols = { ":cherries:", ":lemon:", ":grapes:", ":watermelon:", ":tangerine:", ":bell:", ":seven:" };
@@ -522,7 +528,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
                 var embedBuilder = new DiscordEmbedBuilder
                 {
-                    Title = $"{ctx.User.Username} Gambled {(int)bet} and lost and now has {userPoints} ",
+                    Title = $"{ctx.User.Username} Gambled ${(int)bet} and lost and now has ${userPoints} ",
                     Color = DiscordColor.Red,
 
                 };
@@ -553,7 +559,21 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
             string filePath = "Bank.json";
             JSONStructure data;
-
+            if (lastRobUse.ContainsKey(userId))
+            {
+                TimeSpan timeSinceLastUse = DateTime.Now - lastRobUse[userId];
+                if (timeSinceLastUse.TotalHours < 2)
+                {
+                    var remainingTime = TimeSpan.FromHours(24) - timeSinceLastUse;
+                    var embedBuilders = new DiscordEmbedBuilder
+                    {
+                        Title = $"You're on the run, so if you don't want to get caught by the cops, lay low for {remainingTime.Hours} hours and {remainingTime.Minutes} minutes.",
+                        Color = customColor,
+                    };
+                    await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilders));
+                    return;
+                }
+            }
             if (user.IsBot)
             {
                 var embedBuilder = new DiscordEmbedBuilder
@@ -561,9 +581,9 @@ namespace ZeDarkSide_Discord_Bot.Commands
                     Title = $"ERROR 847",
                     Description = $"Bots can't interact with database Error 847...",
                     Color = customColor,
-
+                   
                 };
-                embedBuilder.WithFooter("Error codes Please user !!ErrorCode (error code) for more information");
+                embedBuilder.WithFooter("Error codes Please user !!ErrorCode (error code) for more information", "https://images-ext-1.discordapp.net/external/OF0r3zkCIyqBD9kLTZDqZ0Sv-2sblM0-ZpdRwNRPbxs/https/img.icons8.com/cotton/64/000000/info.png");
                 await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
 
             }
@@ -691,11 +711,11 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 var embedBuilder = new DiscordEmbedBuilder
                 {
                     Title = $"{ctx.User.Username} Tried to Rob {user.Username}",
-                    Description = $"But {user.Username} caught {ctx.User.Username} and stole ${WoLs} from them!",
+                    Description = $"{user.Username} caught {ctx.User.Username} and stole ${WoLs} from them!",
                     Color = customColor,
 
                 };
-
+                lastRobUse[userId] = DateTime.Now;
                 await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
             }
             else if (WoL == 7 || WoL == 9 || WoL == 8)
@@ -703,9 +723,10 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 var embedbuilder = new DiscordEmbedBuilder
                 {
                     Title = $"{ctx.User.Username} Tried to Rob {user.Username}",
-                    Description = $"But made too many sounds and was about to be caught so they fled.",
+                    Description = $"They made too much noise and were about to be caught, so they fled.",
                     Color = customColor,
                 };
+                lastRobUse[userId] = DateTime.Now;
                 await ctx.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedbuilder));
             }
 
@@ -716,7 +737,54 @@ namespace ZeDarkSide_Discord_Bot.Commands
         #endregion
 
 
+        [SlashCommand("ModInfo", "Get information about destiny mods")]
+        public async Task ModInfo(InteractionContext ctx, [Autocomplete(typeof(ModNameAutocompleteProvider)), Option("ModName", "The name of the mod to get information about", true)] string modName = null)
+        {
+            var customColor = new DiscordColor(255, 71, 59);
 
+            await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
+    .WithContent("Not available at this time!"));
+            return;
+
+            if (modName == null)
+            {
+                await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
+                    .WithContent("Please choose a mod!"));
+                return;
+            }
+
+            if (DictionaryDataBase.ModDetails.TryGetValue(modName, out var modInfo))
+            {
+                var embedBuilder = CreateModEmbed(modInfo.Title, modInfo.Description, modInfo.Slot, modInfo.ImageUrl, modInfo.CommunityResearch, customColor);
+                await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
+                    .AddEmbed(embedBuilder));
+            }
+            else
+            {
+                await ctx.Interaction.CreateResponseAsync(DSharpPlus.InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder()
+                    .WithContent("Mod not found."));
+            }
+        }
+
+        private DiscordEmbedBuilder CreateModEmbed(string title, string description, string slot, string imageUrl, string communityResearch, DiscordColor color)
+        {
+            var embedBuilder = new DiscordEmbedBuilder
+            {
+                Title = title,
+                Description = description,
+                ImageUrl = imageUrl,
+                Color = color,
+            };
+
+            embedBuilder.AddField("Slot", slot, inline: true);
+            if (!string.IsNullOrEmpty(communityResearch))
+            {
+                embedBuilder.AddField("Community Research", communityResearch, inline: true);
+            }
+            embedBuilder.WithFooter("This is still a WIP command. Some things may be wrong or outright missing", "https://images-ext-1.discordapp.net/external/OF0r3zkCIyqBD9kLTZDqZ0Sv-2sblM0-ZpdRwNRPbxs/https/img.icons8.com/cotton/64/000000/info.png");
+
+            return embedBuilder;
+        }
 
 
         #region Basis commands with helping and testing
@@ -763,7 +831,11 @@ namespace ZeDarkSide_Discord_Bot.Commands
             };
             // embedBuilder.AddField("Addpoints", $"**This is an owner-only command!**", inline: false);
             // embedBuilder.AddField("PauseBot", $"**This is an Owner-only command!**", inline: false);
-            embedBuilder.AddField("Raid", $"!!raid [name] [start time] use a name from this list [lw,kf,vog,vow,dsc,gos,ron] and start time [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
+            embedBuilder.AddField("Raid", $"!!raid [name] [start time] [desc if you want] use a name from this list [lw,kf,vog,vow,dsc,gos,ron,se] and start time [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
+            embedBuilder.AddField("Excision", $"!!exc [start time] Excision GM and start time [Use This](https://r.3v.fi/discord-timestamps/)", inline: false);
+            embedBuilder.AddField("Daily", $"!!daily gives the user $1000. you can use it once every 24 Hours", inline: false);
+            embedBuilder.AddField("Raid ping ", $"!!raidping <messageid> <message> will ping everyone that was in the join slot of a raid post", inline: false);
+            embedBuilder.AddField("Change raid time ", $"!!changeraidtime <messageid> <new time> will change the raid post start time", inline: false);
 
             await ctx.CreateResponseAsync(InteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embedBuilder));
         }

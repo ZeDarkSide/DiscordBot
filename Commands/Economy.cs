@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.VisualBasic;
 
 namespace ZeDarkSide_Discord_Bot.Commands
 {
@@ -376,7 +377,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
             var customColor = new DiscordColor(255, 71, 59);
             ulong userId = ctx.User.Id;
             int userPoints = 0;
-
+            
             if (lastDailyUse.ContainsKey(userId))
             {
                 TimeSpan timeSinceLastUse = DateTime.Now - lastDailyUse[userId];

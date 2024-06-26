@@ -20,7 +20,8 @@ using HtmlAgilityPack;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Net.Http;
-
+using Sentry;
+using Sentry.Profiling;
 
 
 namespace ZeDarkSide_Discord_Bot.Commands
@@ -41,7 +42,7 @@ namespace ZeDarkSide_Discord_Bot.Commands
         {
 
             var loadingMessage = await ctx.RespondAsync("Loading data...");
-            string RaidInfo = "";
+            //string RaidInfo = "";
             string imageUrl = "";
             string LostSectorName = "";
             string NightfallName = "";
@@ -73,7 +74,6 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 {
                     LostSectorName = "Unknown";
                 }
-
                 if (!string.IsNullOrEmpty(nightfallName))
                 {
                     NightfallName = nightfallName;
@@ -82,7 +82,6 @@ namespace ZeDarkSide_Discord_Bot.Commands
                 {
                     NightfallName = "Unknown";
                 }
-
                 if (!string.IsNullOrEmpty(weeklyExoticMission))
                 {
                     WeeklyExoticMission = weeklyExoticMission;
@@ -225,53 +224,44 @@ namespace ZeDarkSide_Discord_Bot.Commands
             }*/
 
             if (WeeklyRaid == "Deep Stone Crypt")
-            {
-                RaidInfo = "Deep Stone Crypt";
+            {              
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/europa-raid-deep-stone-crypt.jpg";
             }
             else if (WeeklyRaid == "Crota's End")
-            {
-                RaidInfo = "Crota's End";
+            {               
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_Crotas_end.jpg";
             }
             else if (WeeklyRaid == "Root of Nightmares")
-            {
-                RaidInfo = "Root of Nightmares";
+            {          
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_root_of_nightmares.jpg";
             }
             else if (WeeklyRaid == "Kings Fall")
-            {
-                RaidInfo = "King's Fall";
+            {            
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_nemesis.jpg";
             }
             else if (WeeklyRaid == "Vow of the Disciple")
-            {
-                RaidInfo = "Vow of the Disciple";
+            {              
                 imageUrl = "https://www.blueberries.gg/wp-content/uploads/2022/03/Vow-of-the-Disciple-Destiny-2-900p-1-1536x864.jpg";
             }
             else if (WeeklyRaid == "Garden of Salvation")
             {
-                RaidInfo = "Garden of Salvation";
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_garden_of_salvation.jpg";
             }
             else if (WeeklyRaid == "Last Wish")
-            {
-                RaidInfo = "Last Wish";
+            {               
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/raid_beanstalk.jpg";
             }
             else if (WeeklyRaid == "Vault of Glass")
-            {
-                RaidInfo = "Vault of Glass";
+            {              
                 imageUrl = "https://www.bungie.net/img/destiny_content/pgcr/vault_of_glass.jpg";
             }
 
-
-
+            
             await loadingMessage.DeleteAsync();
             var embedBuilder = new DiscordEmbedBuilder()
                 .WithTitle("Weekly Rotation")
-                .AddField("Raid", $"**{WeeklyRaid}\nCrota's End**", inline: true)
-                .AddField("Dungeon", $"**{WeeklyDungeon}\nWarlord's Ruin**", inline: true)
+                .AddField("Raid", $"**{WeeklyRaid}\n**", inline: true)
+                .AddField("Dungeon", $"**{WeeklyDungeon}\n**", inline: true)
                 .AddField("Updates Daily \nLost Sector", $"**{LostSectorName}**", inline: false)
                 .AddField("NightFall", $"**{NightfallName}**", inline: true)
                 .AddField("Weekly Exotic Mission", $"**{WeeklyExoticMission}**", inline: true)
@@ -379,6 +369,9 @@ namespace ZeDarkSide_Discord_Bot.Commands
 
             return null;
         }
+
+
+
 
     }
 

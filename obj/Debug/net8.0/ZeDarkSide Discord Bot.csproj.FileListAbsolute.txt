@@ -26,3 +26,49 @@ E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSi
 E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ref\ZeDarkSide Discord Bot.dll
 E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\RestSharp.dll
 E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\HtmlAgilityPack.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Diagnostics.NETCore.Client.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Sentry.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Diagnostics.FastSerialization.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Diagnostics.Tracing.TraceEvent.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Sentry.Profiling.dll
+E:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\Sentry.Attributes.cs
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ZeDarkSide Discord Bot.exe
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ZeDarkSide Discord Bot.dll.config
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ZeDarkSide Discord Bot.deps.json
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ZeDarkSide Discord Bot.runtimeconfig.json
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ZeDarkSide Discord Bot.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ZeDarkSide Discord Bot.pdb
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\ConcurrentCollections.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\DSharpPlus.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\DSharpPlus.CommandsNext.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\DSharpPlus.Interactivity.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\DSharpPlus.SlashCommands.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\HtmlAgilityPack.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Diagnostics.NETCore.Client.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\RestSharp.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Sentry.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Diagnostics.FastSerialization.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Microsoft.Diagnostics.Tracing.TraceEvent.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\Sentry.Profiling.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\bin\Debug\net8.0\System.ComponentModel.Composition.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.csproj.AssemblyReference.cache
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.GeneratedMSBuildEditorConfig.editorconfig
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\Sentry.Attributes.cs
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.csproj.CoreCompileInputs.cache
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSi.28AF0D5A.Up2Date
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\refint\ZeDarkSide Discord Bot.dll
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.pdb
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ZeDarkSide Discord Bot.genruntimeconfig.cache
+D:\DCBOT\ZeDarkSide Discord Bot\ZeDarkSide Discord Bot\obj\Debug\net8.0\ref\ZeDarkSide Discord Bot.dll

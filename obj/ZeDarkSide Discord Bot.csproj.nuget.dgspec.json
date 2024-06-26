@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj": {}
+    "D:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj": {}
   },
   "projects": {
-    "E:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj": {
+    "D:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj",
+        "projectUniqueName": "D:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj",
         "projectName": "ZeDarkSide Discord Bot",
-        "projectPath": "E:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj",
+        "projectPath": "D:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot.csproj",
         "packagesPath": "C:\\Users\\chanc\\.nuget\\packages\\",
-        "outputPath": "E:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\obj\\",
+        "outputPath": "D:\\DCBOT\\ZeDarkSide Discord Bot\\ZeDarkSide Discord Bot\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chanc\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -97,6 +97,14 @@
               "target": "Package",
               "version": "[110.2.0, )"
             },
+            "Sentry": {
+              "target": "Package",
+              "version": "[4.6.2, )"
+            },
+            "Sentry.Profiling": {
+              "target": "Package",
+              "version": "[4.6.2, )"
+            },
             "System.Collections.Immutable": {
               "target": "Package",
               "version": "[8.0.0, )"
@@ -134,7 +142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300-preview.24203.14/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
